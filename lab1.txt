@@ -1,0 +1,15 @@
+1) 
+SELECT B.Book_id,B.Tittle,B.Pub_Year,A.Author_Name,C.Programm_id FROM book B,book_author A,book_copies C WHERE B.Book_id=A.Book_id and B.Book_id=C.Book_id;
+
+1)//little bit changes of no_of_copies to no for execution of proffeer query
+SELECT B.Book_id,B.Tittle,B.Pub_Year,A.Author_Name,C.No FROM book B,book_author A,book_copies C WHERE B.Book_id=A.Book_id and B.Book_id=C.Book_id;
+
+2)
+SELECT Card_No FROM book_lending WHERE Date_Out BETWEEN'01-jan-2017' and '01-jul-2017'
+GROUP BY Card_No HAVING COUNT(*)>3;
+
+3)
+delete FROM book where Book_id=12;
+
+4)
+create view v_pubyear as select Pub_Year from book;

@@ -1,0 +1,20 @@
+
+1)
+SELECT s.Usn,s.SName,s.Address,s.Phno,s.Gender,u.Sem,u.Sec FROM student s,class c ,semsec u WHERE s.Usn=c.Usn and u.SSid=c.SSid and u.Sem=5 and u.Sec='c';
+
+2)
+SELECT u.sem,u.sec,s.gender,count(*) FROM student s,semsec u,class c WHERE s.usn=c.usn and c.ssid=u.ssid GROUP BY u.sem,u.sec,s.gender;
+
+3)
+CREATE VIEW TEST1_MARKS_OF_1bi15cs101(usn,name,subcode,title,test1) as SELECT s.usn,s.sname,i.subcode,sub.tittle,i.test1 FROM student s,iamarks i,course sub WHERE s.usn=i.usn and i.subcode=sub.subcode and s.usn='101';
+
+4)
+UPDATE iamarks
+ SET finalia=case
+ WHEN (test1<test2 and test1<test3) then ceil((test2+test3)/2)
+ WHEN (test2<test1 and test2<test3) then ceil((test1+test3)/2)
+ ELSE ceil((test1+test2)/2)
+ END;
+
+5)
+SELECT s.usn,s.sname,sec.sem,sec.sec,i.subcode,i.finalia, case when (I.finalia>=17 and i.finalia<=20) then 'outstanding' when (i.finalia>=12 and i.finalia<=16) then 'average' when (i.finalia<12) then 'weak' else 'un_known' end cat FROM student s,iamarks i,semsec sec WHERE s.usn=i.usn and i.ssid=sec.ssid and sec.sem=5 and sec.sec in('a','b','c') ORDER BY cat;

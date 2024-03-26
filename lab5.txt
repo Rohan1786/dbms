@@ -1,0 +1,18 @@
+1)
+(SELECT distinct p.pno from project p,department d,employee e WHERE d.dno=p.dno and mgrssn=ssn and name like'%Ramesh') UNION (SELECT distinct p.pno from project p,workson w,employee e WHERE p.pno=w.pno and w.ssn=e.ssn and name like '%Ramesh');
+
+or
+(SELECT DISTINCT pno from project p, department d,employee e WHERE p.dno=d.dno and e.ssn=d.mgrssn and Name="Ramesh") UNION ( SELECT DISTINCT p.pno from project p,employee e,workson w WHERE p.Pno=w.pno and e.ssn=w.SSN and e.name="Ramesh" );
+
+2)
+SELECT name,1.1*salary FROM employee e,project p,workson w WHERE e.ssn=w.ssn AND p.pno=w.pno AND p.pname='Android';
+
+
+3)
+SELECT SUM(E.SALARY) ,MIN(E.SALARY) ,MAX(E.SALARY),AVG(E.SALARY) FROM employee E ,department D WHERE DNO=D.DNO AND DNAME='CSE';
+
+4)
+SELECT DISTINCT E.Name FROM EMPLOYEE E WHERE NOT EXISTS (SELECT P.PNo FROM PROJECT P WHERE P.DNo =5 AND NOT EXISTS (SELECT * FROM workson W WHERE W.pno = P.pno AND W.SSN = E.SSN));
+
+5)
+SELECT dno,count(*) FROM department d,employee WHERE d.dno=dno and salary>6000 AND dno in (select dno from employee group by dno having count(dno) >=1) GROUP BY dno;

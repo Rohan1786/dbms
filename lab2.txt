@@ -1,0 +1,16 @@
+1)
+SELECT Grade,COUNT(DISTINCT Customer_id) from customer GROUP BY Grade having grade>(SELECT avg(Grade) from customer WHERE City="Bengalur");
+
+2)
+SELECT Salesman_id,Name FROM salesman A WHERE 1<(SELECT COUNT(*) FROM customer C WHERE C.Salesman_id=A.Salesman_id);
+
+3)
+SELECT S.Salesman_id,Name,Commision, C.Cust_Name FROM salesman S,customer C WHERE S.City=C.City UNION SELECT S.Salesman_id,Name,'NOTMATCH',Commision FROM salesman S WHERE NOT City=ANY(SELECT City FROM customer) ORDER BY 2 DESC;
+
+
+4)
+CREATE VIEW vw_salesman AS SELECT S.salesman_id,NAME,B.Ord_Date FROM salesman S,orders B WHERE S.salesman_id=B.salesman_id AND B.Purchase_amt=(SELECT MAX(Purchase_amt) FROM orders C WHERE B.Ord_Date=C.Ord_Date);
+
+
+5)
+DELETE from salesman WHERE Salesman_id=4;

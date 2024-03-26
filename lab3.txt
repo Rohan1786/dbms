@@ -1,0 +1,13 @@
+1)
+select Movie_Tittle,Dir_Name from director D,movie M where D.Dir_id=M.Dir_id AND Dir_Name='Rohan';
+
+2)
+SELECT Movie_Tittle FROM movie M, movcast MV WHERE M.Movie_id=MV.Movie_id AND Act_id IN (SELECT Act_id FROM movcast GROUP BY Act_id HAVING COUNT(Act_id)>0);
+
+3)
+SELECT M.Movie_Year,A.Act_Name,M.Movie_Tittle FROM actor A JOIN movcast MC ON A.Act_id=MC.Act_id INNER JOIN movie M ON MC.Movie_id=M.Movie_id WHERE M.Movie_Year NOT BETWEEN 2000 AND 2015;
+
+
+4) SELECT Movie_Tittle,MAX(Rev_Star) FROM movie M,rating MR WHERE M.Movie_id=MR.Movie_id GROUP BY Movie_Tittle HAVING MAX(Rev_Star)>0 ORDER BY Movie_Tittle;
+5)
+UPDATE rating SET Rev_Star=6 WHERE Movie_id IN(SELECT Movie_id FROM movie WHERE Dir_id IN(SELECT Dir_id FROM director WHERE Dir_Name='Rohan'));
